@@ -1,13 +1,10 @@
 ---
 layout: default
 ---
-> SSH ROOT@RESEARCH_LAB... [CONNECTED]
-> LOADING_DASHBOARD...
-
 ----------------------------------------------------------
-[ ANALYST_PORTFOLIO_V1 ]
+[ RESEARCH PORTFOLIO  ]
 ----------------------------------------------------------
-# SECURITY_RESEARCH_LAB
+# SECURITY RESEARCH
 
 ## // CATEGORIES
 * [MALWARE](./malware-list.md)
