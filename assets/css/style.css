@@ -1,50 +1,59 @@
-/* PHRACK-INSPIRED DARK MODE */
+/* PHRACK.ORG AUTHENTIC REPLICA */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff; /* Clean White */
+  color: #000000;      /* Sharp Black */
+  
+  /* The typewriter stack */
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12pt;
+  line-height: 1.25;
+
+  /* This keeps the text looking like an old printer vs a modern webpage */
+  -webkit-font-smoothing: none;
+  text-rendering: crispEdges;
+}
+
+/* Page width: Phrack is narrow for easy reading */
 body {
-    background-color: #000000;
-    color: #ffffff; /* White text as requested */
-    
-    /* Phrack uses a very clean monospace stack */
-    font-family: "Lucida Console", "Monaco", "Courier New", Courier, monospace;
-    font-size: 12px; /* Your preferred size */
-    line-height: 1.5; /* Phrack has more 'breathing room' than tmpout */
-    
-    /* Wide Phrack-style margins */
-    max-width: 900px;
-    margin: 60px auto;
-    padding: 40px;
-    
-    /* Keeps the font sharp and 'un-smoothed' */
-    text-rendering: crispEdges;
-    -webkit-font-smoothing: none;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 32px;
 }
 
-/* Red Links for the High-Contrast Look */
+/* Headings: All the same size, just bold, like a .txt file */
+h1, h2, h3, h4 {
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 1.2em 0 0.6em 0;
+  text-transform: uppercase;
+}
+
+/* Links: Classic underlined style */
 a {
-    color: #ff0000;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
+  color: #000000;
+  text-decoration: underline;
 }
 
+/* The 'Inverse' hover effect you liked */
 a:hover {
-    border-bottom: 1px solid #ff0000;
+  background: #000000;
+  color: #ffffff;
+  text-decoration: none;
 }
 
-/* Headers: Simple and Clean like a text file */
-h1, h2, h3 {
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-top: 40px;
-    border-bottom: 1px solid #333; /* Subtle Phrack separator */
-    padding-bottom: 10px;
+/* Preformatted blocks for logs/code */
+pre {
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre;
+  margin: 1em 0;
+  padding-left: 20px; /* The indent you found in your inspection */
 }
 
-/* The specific 20px padding you discovered */
-ul, ol, pre {
-    padding-left: 20px;
-    margin-bottom: 25px;
-}
-
-/* Bullet points for your research findings */
-li {
-    margin-bottom: 10px;
+/* Horizontal rule: The thin divider line */
+hr {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 2em 0;
 }
