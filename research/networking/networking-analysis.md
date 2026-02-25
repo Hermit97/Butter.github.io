@@ -21,4 +21,4 @@ This led me to my next check which was analyzing the DNS protocol. Before even t
 
 Using the “dns.flags.response == 0 && ip.src == 10.1.21.58 && frame.time_relative > 60 && frame.time_relative < 95” filter allowed me to go on a deep analysis looking for any suspicious sites the victim may have gone on before the DNS came into contact with the attacker host whitepepper.su. 
 
-![DNS Query Ingress Analysis](assets/images/dns-query-ingress-analysis.png)
+![DNS Query Ingress Analysis](../../assets/images/dns-query-ingress-analysis.png)
