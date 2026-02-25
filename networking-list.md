@@ -5,4 +5,4 @@ layout: default
 
 ## // ARCHIVE
 * [SMB_LATERAL_MOVEMENT](./research/networking/smb-analysis)
-* [PLACEHOLDER](./research/networking/smb-analysis)
+* [LUMMA IN THE ROOM-AH](./research/networking/networking-analysis)
