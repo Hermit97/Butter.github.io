@@ -35,3 +35,27 @@ Initial host-based filtering returned null results; however, pivoting to DNS res
 Fortunately we can use the filter “dns.resp.name == "whooptm.cyou". This will hide everything except the ip address of whooptm.cyou. Resulting in, 
 
 ![whoopsc Analysis](../../assets/images/whoopsc.png)
+Which gives us the address of the first contact by the attacker. 
+
+## Learning more about the Encrypted Payload
+While digging deeper into the traffic between the attacker and the victim, I identifed what could possibly be the malicious content (which could be files or a .exe being sent over). If you look at the image below, it shows the length of both of the traffic being sent for packet #23677 and #23678 being the same, 1410 which is the size of a full sized packet. 
+
+![whoopsc Analysis](../../assets/images/sechello.png)
+
+Using this same method I can calculate the size of the files or .exe that was being sent over to the victims network. Or another way that some might find more efficient is using the tcp trace graph. In the screen shot below we can see that after selecting packet 23677 as the initial beginning of the malware transfer and then opening the tcp trace graph we can tell that this was just the initial drop. Meaning the start of the transfer over not the end. 
+
+![whoopsc Analysis](../../assets/images/tcpcap.png)
+
+We can tell this by how small the payload is, it's only roughly 6kb. This is more likely the stage one dropper. After this analysis I could further assume that this was designed to evade basic signature-based detection before establishing a C2 channel.
+
+While the payload volume initially appeared negligible, a comparative analysis of the sequence numbers confirmed a deliberate, low-signal transfer designed to minimize the network footprintThese packets carried some sort of encrypted malware that we can't see the contents off simply based on just the pcap. 
+
+Since the whole payload is just about 6kb we can interpret this as the actual malware was not a full fledged ransomware or something else to that regard either since it was so small. If anything it could have just been some simple drop to get in and then communicate to whitepepper.su that they are ready to receive what we could assume would then be the actual malware. 
+
+I used ip.src == 10.1.21.58 && (tcp.port == 445 || tcp.port == 3389 || tcp.port == 22) as a filter to confirm that this was indeed an isolated incident and it did not spread to any other networks. The result of which was indeed it was isolated and contained only to the victims network. Initial assessment of the 6 KB payload suggested a standard dropper; however, extended forensic analysis revealed a sophisticated reconnaissance module. This illustrates the importance of multi-stage traffic reconstruction—looking beyond the initial delivery to understand the full scope of the C2 (Command & Control) lifecycle".
+
+The objective of the next phase is to quantify the payload volume, determine the adversarial intent, and verify if data exfiltration had occurred during the session
+After identifying the post request from whitepepper.su, I was able to follow the HTTP steam and view the actual payload being dropped into the c2 steam from before and then I can even see the information being sent back to whitepepper.su that the payload was extracting. 
+
+## Static code analysis 
+By performing Static Code Analysis on the extracted JavaScript, I mapped the attacker's execution logic. I identified specific browser fingerprinting techniques, including hardware concurrency checks and WebGL renderer identification, used to distinguish real victim machines from research sandboxes.
