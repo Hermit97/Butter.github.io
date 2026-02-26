@@ -52,10 +52,26 @@ While the payload volume initially appeared negligible, a comparative analysis o
 
 Since the whole payload is just about 6kb we can interpret this as the actual malware was not a full fledged ransomware or something else to that regard either since it was so small. If anything it could have just been some simple drop to get in and then communicate to whitepepper.su that they are ready to receive what we could assume would then be the actual malware. 
 
-I used ip.src == 10.1.21.58 && (tcp.port == 445 || tcp.port == 3389 || tcp.port == 22) as a filter to confirm that this was indeed an isolated incident and it did not spread to any other networks. The result of which was indeed it was isolated and contained only to the victims network. Initial assessment of the 6 KB payload suggested a standard dropper; however, extended forensic analysis revealed a sophisticated reconnaissance module. This illustrates the importance of multi-stage traffic reconstruction—looking beyond the initial delivery to understand the full scope of the C2 (Command & Control) lifecycle".
+I used ip.src == 10.1.21.58 && (tcp.port == 445 || tcp.port == 3389 || tcp.port == 22) 
+as a filter to confirm that this was indeed an isolated incident and it did not spread to any other networks. The result of which was indeed it was isolated and contained only to the victims network. Initial assessment of the 6 KB payload suggested a standard dropper; however, extended forensic analysis revealed a sophisticated reconnaissance module. This illustrates the importance of multi-stage traffic reconstruction—looking beyond the initial delivery to understand the full scope of the C2 (Command & Control) lifecycle".
 
 The objective of the next phase is to quantify the payload volume, determine the adversarial intent, and verify if data exfiltration had occurred during the session
 After identifying the post request from whitepepper.su, I was able to follow the HTTP steam and view the actual payload being dropped into the c2 steam from before and then I can even see the information being sent back to whitepepper.su that the payload was extracting. 
 
 ## Static code analysis 
 By performing Static Code Analysis on the extracted JavaScript, I mapped the attacker's execution logic. I identified specific browser fingerprinting techniques, including hardware concurrency checks and WebGL renderer identification, used to distinguish real victim machines from research sandboxes.
+
+![Malware Script Analysis](../../assets/images/script.png)
+
+Above we can see that the malware was building a sort of profile using the object called navigator. 
+
+The size of the malware itself is only 7kb so definitely not a large complex malware. It seems like it was used just to collect information about the victims machine. 
+
+## Cyber Kill Chain phases
+1. Delivery/Exploitation: Identified the DNS redirect to whooptm.cyou.
+2. Installation: Isolated the 6 KB encrypted payload delivery via TLS 1.3.
+3. Command & Control: Deconstructed the cleartext HTTP beacons to whitepepper.su.
+4. Actions on Objectives: Decoded the exfiltration of host hardware fingerprints and browser metadata.
+
+
+
